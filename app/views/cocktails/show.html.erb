@@ -1,18 +1,35 @@
-<h1><%= @cocktail.name %></h1>
+<h1 class="mb-5">
+  <%= @cocktail.name %>
+</h1>
 
-<h5>Recipe</h5>
+<div class="d-flex justify-content-between">
+  <div class="col-3">
+    <h5>Preparation</h5>
+    <% if @cocktail.doses.empty? %>
+      <h5>Please add some ingredients</h5>
+      <h1>🤷‍♂️</h1>
+    <% else %>
+      <ul class="list-inline">
+        <% @cocktail.doses.each do |dose| %>
+          <li class="d-flex justify-content-between">
+            <div class="mb-3">
+              <%= dose.description %>
+              <%= dose.ingredient.name %>
+            </div>
+            <div>
+              <%= link_to 'Delete', dose, method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-sm btn-danger' %>
+            </div>
+          </li>
+        <% end %>
+      </ul>
+    <% end %>
+  </div>
+  <div class="col-3">
+    <%= render partial: 'doses/form' %>
+  </div>
 
-<h6>Add dose</h6>
-<%= render partial: 'doses/form' %>
+</div>
 
-<ul>
-  <% @cocktail.doses.each do |dose| %>
-    <li>
-        <%= dose.description %>
-        <%= dose.ingredient.name %>
-        <%= link_to 'Delete', dose, method: :delete, data: { confirm: "Are you sure?" } %>
-    </li>
-  <% end %>
-</ul>
+<%#= link_to 'Delete', @cocktail, method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-danger' %>
 
-<%= link_to 'Back to Cocktails', cocktails_path %>
+<%= link_to 'Back to Cocktails', cocktails_path, class: 'btn btn-info' %>

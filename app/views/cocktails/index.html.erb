@@ -1,13 +1,21 @@
-<h1>Cocktails</h1>
+<h1 class="mb-5">Cocktails</h1>
 
-<%= link_to 'Add Cocktail', new_cocktail_path %>
 
-<ul>
-  <% @cocktails.each do |cocktail| %>
-    <li>
-      <%= link_to cocktail do %>
-        <%= cocktail.name %>
+<div class="d-flex justify-content-between">
+  <div class="col-8">
+    <ul class="list-inline">
+      <% @cocktails.each do |cocktail| %>
+        <li>
+          <h5>
+            <%= link_to cocktail do %>
+              <%= cocktail.name %>
+            <% end %>
+          </h5>
+        </li>
       <% end %>
-    </li>
-  <% end %>
-</ul>
+    </ul>
+  </div>
+  <div class="col-4">
+    <%= link_to 'Add Cocktail', new_cocktail_path, class: 'btn btn-primary' %>
+  </div>
+</div>
